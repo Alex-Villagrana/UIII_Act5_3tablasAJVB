@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Cliente{% endblock %}
+{% block content %}
+<div class="alert alert-danger shadow-sm" role="alert">
+    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i>¡Advertencia!</h4>
+    <p>Estás a punto de **eliminar permanentemente** al cliente:</p>
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>ID:</strong> {{ cliente.id_cliente }}</li>
+        <li class="list-group-item"><strong>Nombre:</strong> {{ cliente.nombre }}</li>
+        <li class="list-group-item"><strong>Productos Comprados:</strong> {% for producto in cliente.compra.all %}{{ producto.nombre }} - {{ producto.marca }}{% if not forloop.last %}, {% endif %}{% empty %}Ninguno{% endfor %}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{ cliente.email }}</li>
+    </ul>
+    <hr>
+    <p class="mb-0">¿Estás seguro de que deseas continuar con la eliminación?</p>
+    <form method="post" action="{% url 'borrar_cliente' pk=cliente.pk %}" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="bi bi-trash-fill me-2"></i>Sí, Eliminar Cliente</button>
+        <a href="{% url 'ver_clientes' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h3 mb-0"><i class="bi bi-house-door-fill me-2"></i>Bienvenido al Sistema de Administración Skateshop</h1>
+                </div>
+                <div class="card-body">
+                    <p class="lead">Gestiona clientes, proveedores y productos de manera eficiente.</p>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-people-fill fs-1 text-primary mb-3"></i>
+                                    <h5 class="card-title">Clientes</h5>
+                                    <p class="card-text">Agrega, ve, actualiza y borra clientes.</p>
+                                    <a href="{% url 'ver_clientes' %}" class="btn btn-primary">Ver Clientes</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-truck-flatbed fs-1 text-info mb-3"></i>
+                                    <h5 class="card-title">Proveedores</h5>
+                                    <p class="card-text">Agrega, ve, actualiza y borra proveedores.</p>
+                                    <a href="{% url 'ver_proveedores' %}" class="btn btn-info">Ver Proveedores</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-box-seam-fill fs-1 text-warning mb-3"></i>
+                                    <h5 class="card-title">Productos</h5>
+                                    <p class="card-text">Agrega, ve, actualiza y borra productos.</p>
+                                    <a href="{% url 'ver_productos' %}" class="btn btn-warning">Ver Productos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Actualizar Proveedor{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-warning text-dark"><h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Actualizar Proveedor</h5></div>
+    <div class="card-body">
+        <form method="post" action="{% url 'realizar_actualizacion_proveedor' pk=proveedor.pk %}">
+            {% csrf_token %}
+            <h6 class="card-subtitle mb-3 text-muted">Editando Proveedor: {{ proveedor.contacto_nombre }}</h6>
+            <div class="mb-3"><label for="contacto_nombre" class="form-label">Nombre de Contacto:</label><input type="text" class="form-control" id="contacto_nombre" name="contacto_nombre" value="{{ proveedor.contacto_nombre }}" required></div>
+            <div class="mb-3"><label for="telefono" class="form-label">Teléfono:</label><input type="text" class="form-control" id="telefono" name="telefono" value="{{ proveedor.telefono }}" required></div>
+            <div class="mb-3"><label for="email" class="form-label">Email:</label><input type="email" class="form-control" id="email" name="email" value="{{ proveedor.email }}" required></div>
+            <div class="mb-3"><label for="direccion" class="form-label">Dirección:</label><textarea class="form-control" id="direccion" name="direccion" rows="3" required>{{ proveedor.direccion }}</textarea></div>
+            <div class="row">
+                <div class="col-md-4 mb-3"><label for="pais" class="form-label">País:</label><input type="text" class="form-control" id="pais" name="pais" value="{{ proveedor.pais }}" required></div>
+                <div class="col-md-4 mb-3"><label for="estado" class="form-label">Estado:</label><input type="text" class="form-control" id="estado" name="estado" value="{{ proveedor.estado }}" required></div>
+                <div class="col-md-4 mb-3"><label for="ciudad" class="form-label">Ciudad:</label><input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ proveedor.ciudad }}" required></div>
+            </div>
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle-fill me-2"></i>Guardar Cambios</button>
+            <a href="{% url 'ver_proveedores' %}" class="btn btn-secondary ms-2">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

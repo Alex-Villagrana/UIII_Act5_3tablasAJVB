@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Producto{% endblock %}
+{% block content %}
+<div class="alert alert-danger shadow-sm" role="alert">
+    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i>¡Advertencia!</h4>
+    <p>Estás a punto de **eliminar permanentemente** el producto:</p>
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>ID:</strong> {{ producto.pk }}</li>
+        <li class="list-group-item"><strong>Nombre:</strong> {{ producto.nombre }}</li>
+        <li class="list-group-item"><strong>Marca:</strong> {{ producto.marca }}</li>
+        <li class="list-group-item"><strong>Precio:</strong> ${{ producto.precio }}</li>
+        <li class="list-group-item"><strong>Stock:</strong> {{ producto.stock }}</li>
+    </ul>
+    <hr>
+    <p class="mb-0">¿Estás seguro de que deseas continuar con la eliminación?</p>
+    <form method="post" action="{% url 'borrar_producto' pk=producto.pk %}" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="bi bi-trash-fill me-2"></i>Sí, Eliminar Producto</button>
+        <a href="{% url 'ver_productos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

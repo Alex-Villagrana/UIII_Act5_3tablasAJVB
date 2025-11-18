@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Actualizar Cliente{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-warning text-dark"><h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Actualizar Cliente</h5></div>
+    <div class="card-body">
+        <form method="post" action="{% url 'realizar_actualizacion_cliente' pk=cliente.pk %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h6 class="card-subtitle mb-3 text-muted">Editando Cliente: {{ cliente.nombre }}</h6>
+            <div class="mb-3"><label for="nombre" class="form-label">Nombre:</label><input type="text" class="form-control" id="nombre" name="nombre" value="{{ cliente.nombre }}" required></div>
+            <div class="mb-3"><label for="compra" class="form-label">Productos Comprados:</label><select multiple class="form-control" id="compra" name="compra">{% for producto in productos %}<option value="{{ producto.id }}" {% if producto in cliente.compra.all %}selected{% endif %}>{{ producto.nombre }} - {{ producto.marca }}</option>{% endfor %}</select><small class="text-muted">Mantén presionado Ctrl (o Cmd en Mac) para seleccionar múltiples productos</small></div>
+            <div class="mb-3"><label for="email" class="form-label">Email:</label><input type="email" class="form-control" id="email" name="email" value="{{ cliente.email }}" required></div>
+            <div class="mb-3"><label for="telefono" class="form-label">Teléfono:</label><input type="text" class="form-control" id="telefono" name="telefono" value="{{ cliente.telefono|default_if_none:'' }}"></div>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen:</label>
+                {% if cliente.imagen %}
+                    <div class="mb-2">
+                        <img src="{{ cliente.imagen.url }}" alt="Imagen actual" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                        <small class="text-muted d-block">Imagen actual</small>
+                    </div>
+                {% endif %}
+                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                <small class="text-muted">Deja vacío para mantener la imagen actual</small>
+            </div>
+            <div class="form-check mb-4"><input class="form-check-input" type="checkbox" name="activo" id="activo" {% if cliente.activo %}checked{% endif %}><label class="form-check-label" for="activo">Activo</label></div>
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle-fill me-2"></i>Guardar Cambios</button>
+            <a href="{% url 'ver_clientes' %}" class="btn btn-secondary ms-2">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
